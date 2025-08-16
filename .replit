@@ -16,12 +16,25 @@ localPort = 5000
 externalPort = 5000
 
 [workflows]
-runButton = "BWM XMD Bot"
+runButton = "BWM XMD Bot (Yarn)"
 
 [[workflows.workflow]]
 name = "BWM XMD Bot"
 author = 41696134
 mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node index.js"
+
+[[workflows.workflow]]
+name = "BWM XMD Bot (Yarn)"
+author = 41696134
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "yarn install"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"

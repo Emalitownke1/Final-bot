@@ -13,7 +13,7 @@ console.log('📦 Checking dependencies...');
 // Check if node_modules exists
 if (!fs.existsSync('node_modules')) {
     console.log('📦 Installing dependencies...');
-    const install = spawn('npm', ['install'], { stdio: 'inherit' });
+    const install = spawn('yarn', ['install'], { stdio: 'inherit' });
     
     install.on('close', (code) => {
         if (code === 0) {
