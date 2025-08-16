@@ -141,8 +141,13 @@ process.on('SIGINT', () => {
   process.exit(0);
 });
 
-// Start HTTP server
-require('./server');
+// Start HTTP server with error handling
+try {
+  require('./server');
+} catch (serverError) {
+  console.log('⚠️ Server startup issue:', serverError.message);
+  console.log('🔧 Bot will continue without web interface');
+}
 
 // Start the bot
 initializeBot();

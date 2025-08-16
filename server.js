@@ -63,8 +63,21 @@ app.get('/health', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`🌐 BWM XMD Server running on http://0.0.0.0:${PORT}`);
+});
+
+// Handle server errors
+server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+        console.log(`⚠️ Port ${PORT} is already in use, trying alternative port...`);
+        const altPort = PORT + 1;
+        server.listen(altPort, '0.0.0.0', () => {
+            console.log(`🌐 BWM XMD Server running on alternative port http://0.0.0.0:${altPort}`);
+        });
+    } else {
+        console.error('❌ Server error:', error);
+    }
 });
 
 module.exports = app;
